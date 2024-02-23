@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "yirimiraionebot"
+version = "0.0.1"
+description = "YiriMiraiOneBot是一个OneBot 12协议上的Python SDK，延续YiriMirai项目轻量级、低耦合的编码风格。"
+authors = ["XYCode Kerman <xycode-xyc@outlook.com>"]
+license = "AGPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+
+
+[[tool.poetry.source]]
+name = "mirrors"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "default"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
