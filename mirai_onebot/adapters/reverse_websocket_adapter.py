@@ -1,13 +1,13 @@
 import asyncio
 import json
 import uuid
-from typing import List, Union
+from typing import List, Literal, Union
 from urllib.parse import parse_qs, urlparse
 
 import websockets
-from utils import logging
 
 from mirai_onebot.adapters.base import Adapter
+from mirai_onebot.utils import logging
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ class ReverseWebsocketAdapter(Adapter):
         self.host = host
         self.port = port
         self.timeout = timeout
-        self.ws_servers: List[websockets.WebSocketServerProtocol] = []
+        self.ws_connections: List[websockets.WebSocketServerProtocol] = []
 
         asyncio.create_task(self.start_server())
 
@@ -48,14 +48,14 @@ class ReverseWebsocketAdapter(Adapter):
         query = parse_qs(urlparse(websocket.path).query)
         if websocket.request_headers.get('Authorization', '').endswith(self.access_token) or query.get('access_token', '') == self.access_token:
             logger.info('一个OneBot实现建立了连接。')
-            self.ws_servers.append(websocket)
+            self.ws_connections.append(websocket)
             while True:
                 try:
                     await self.recv(websocket)
                 except (ConnectionResetError, websockets.exceptions.ConnectionClosedError):
                     await websocket.wait_closed()
                     logger.info('一个OneBot实现断开了连接。')
-                    self.ws_servers.remove(websocket)
+                    self.ws_connections.remove(websocket)
                     break
         else:
             logger.warning('一个OneBot实现在建立的过程中未正确传递 access_token，请检查设置。')
@@ -68,44 +68,61 @@ class ReverseWebsocketAdapter(Adapter):
 
         # 解析错误
         try:
-            data = json.loads(await websocket.recv())
+            data = await websocket.recv()
+            data: dict = json.loads(data)
         except json.JSONDecodeError:
-            logger.error(
+            logger.warning(
                 f'无法解析 OneBot 实现 {websocket.remote_address[0]} 的消息 {data}。')
             return None
 
-        # 触发事件
-        await self.emit('onebot_event', data)
+        # 解析是事件还是响应
+        if data.get('detail_type', None) is None and data.get('sub_type', None) is None:  # 是响应或其他
+            await self._internal_event_bus.emit('onebot_resp', data=data)
+        else:  # 是事件
+            # 触发事件
+            await self.emit('onebot_event', data)
 
     async def call_api(self, api: str, **params):
-        data = json.dumps({
+        """调用API
+
+        Returns: 一个数组，包含每个OneBot实现的返回值。
+        """
+        data = {
             'action': api,
             'params': params
-        })
+        }
 
-        async def call_server(ws_server: websockets.WebSocketServerProtocol):
+        async def call_server(ws_connection: websockets.WebSocketServerProtocol):
             echo = uuid.uuid4().__str__()
 
             try:
-                await asyncio.wait_for(ws_server.send({
+                await asyncio.wait_for(ws_connection.send(json.dumps({
                     **data,
                     'echo': echo
-                }), timeout=self.timeout)
+                })), timeout=self.timeout)
 
-                await asyncio.wait_for(ws_server.recv(), timeout=self.timeout)
-            except asyncio.CancelledError:
+                # 注：不能同时调用两个recv函数，这里使用内部事件总线进行监听
+                # return await asyncio.wait_for(ws_connection.recv(), timeout=self.timeout)
+                tmp = None
+                recived_event = asyncio.Event()
+
+                @self._internal_event_bus.on('onebot_resp')
+                async def subscriber(data: dict):
+                    if data['echo'] == echo:
+                        nonlocal tmp, recived_event
+                        tmp = data
+                        recived_event.set()
+                        self._internal_event_bus.unsubscribe(
+                            'onebot_resp', subscriber)
+
+                # 直到收到消息
+                await asyncio.wait_for(recived_event.wait(), timeout=self.timeout)
+
+                return tmp
+            except (asyncio.CancelledError, asyncio.TimeoutError):
                 logger.error(f'发送、接收OneBot实现消息时超时。')
+                return -1
 
-        tasks = [asyncio.create_task(call_server(ws_server))
-                 for ws_server in self.ws_servers]
-        await asyncio.wait(tasks)
-
-    async def emit(self, event: str, *args, **kwargs) -> None:
-        """向事件总线发送事件
-
-        Args:
-            event (str): 事件
-        """
-        tasks = [asyncio.create_task(
-            bus.emit(event, *args, **kwargs)) for bus in self.buses]
-        await asyncio.gather(*tasks)
+        tasks = [call_server(ws_connection)
+                 for ws_connection in self.ws_connections]
+        return await asyncio.gather(*tasks)

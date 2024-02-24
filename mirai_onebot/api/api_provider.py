@@ -12,4 +12,3 @@ class ApiProvider(abc.ABC):
             api (str): 该api的名称，例如send_message。
             params (dict): 调用api的参数。
         """
-        pass

@@ -7,12 +7,11 @@ YiriMiraiOneBot是一个OneBot 12协议上的Python SDK，延续YiriMirai项目�
 > 警告：YiriMiraiOneBot正处于开发状态，请勿将其用于生产环境。
 
 ## 功能
-<details>
 * 适配器
   * [ ] HTTP适配器
   * [ ] HTTP Webhook适配器
   * [ ] 正向WebSocket适配器
-  * [ ] 反向Websocket适配器
+  * [x] 反向Websocket适配器
 * 消息类型
   * [ ] Text
   * [ ] Image
@@ -45,7 +44,6 @@ YiriMiraiOneBot是一个OneBot 12协议上的Python SDK，延续YiriMirai项目�
     * [ ] 群组动作
   * [ ] 文件接口
     * [ ] 文件动作
-    </details>
 
 ## 安装
 
