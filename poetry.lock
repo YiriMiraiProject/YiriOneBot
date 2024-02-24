@@ -604,6 +604,22 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 reference = "mirrors"
 
 [[package]]
+name = "objprint"
+version = "0.2.3"
+description = "A library that can print Python objects in human readable format"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "objprint-0.2.3-py3-none-any.whl", hash = "sha256:1721e6f97bae5c5b86c2716a0d45a9dd2c9a4cd9f52cfc8a0dfbe801805554cb"},
+    {file = "objprint-0.2.3.tar.gz", hash = "sha256:73d0ad5a7c3151fce634c8892e5c2a050ccae3b1a353bf1316f08b7854da863b"},
+]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "mirrors"
+
+[[package]]
 name = "packaging"
 version = "23.2"
 description = "Core utilities for Python packages"
@@ -1333,4 +1349,4 @@ reference = "mirrors"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8"
-content-hash = "fd87dfa3680409ca3fcdd6c8642f03f989088faa9dd2d6d0397351498df8a930"
+content-hash = "f5a8ce12409f87a9d8b084e6c4db7517765c19df0f6d73004a46890ead233402"

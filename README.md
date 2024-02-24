@@ -16,22 +16,22 @@ YiriMiraiOneBot 是一个 OneBot 12 协议上的 Python SDK，延续 YiriMirai �
   * [ ] 正向 WebSocket 适配器
   * [x] 反向 Websocket 适配器
 * 消息类型
-  * [ ] Text
-  * [ ] Image
-  * [ ] Mention
-  * [ ] Mention_all
-  * [ ] Voice
-  * [ ] Audio
-  * [ ] Video
-  * [ ] File
-  * [ ] Location
-  * [ ] Reply
+  * [x] Text
+  * [x] Image
+  * [x] Mention
+  * [x] Mention_all
+  * [x] Voice
+  * [x] Audio
+  * [x] Video
+  * [x] File
+  * [x] Location
+  * [x] Reply
 * 接口定义
   * [ ] 元接口
     * [ ] 元事件
     * [ ] 元动作
   * [ ] 消息接口
-    * [ ] 消息段
+    * [x] 消息段
     * [ ] 消息动作
   * [ ] 单用户接口
     * [ ] 用户消息事件
