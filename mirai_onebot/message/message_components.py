@@ -22,9 +22,9 @@ class MessageComponent(ABC):
         return f'{self.message_type}: {self.data}'
 
     def __eq__(self, __value: object) -> bool:
-        try:
+        if isinstance(__value, MessageComponent):
             return self.message_type == __value.message_type and self.data == __value.data
-        except AttributeError:  # 未实例化的__value
+        elif isinstance(__value, type):
             return self.message_type == __value.message_type
 
 

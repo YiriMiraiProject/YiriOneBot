@@ -27,6 +27,7 @@ def test_comps():
 
     assert Video('test').file_id == 'test'
     assert Voice('test').file_id == 'test'
+    assert Voice('test') == Voice
 
 
 def test_message_chain():
@@ -50,4 +51,10 @@ def test_message_chain():
     assert not File('test3') in message_chain
     assert File('test2') in message_chain
 
-    print(message_chain.to_message_chain())
+    # 迭代器测试
+    comp = []
+    for item in message_chain:
+        comp.append(item)
+
+    assert len(comp) == len(message_chain.components)
+    assert message_chain.to_message_chain().__len__() == len(message_chain.components)
