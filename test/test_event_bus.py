@@ -1,4 +1,5 @@
 import pytest
+
 from mirai_onebot.event import EventBus
 
 bus = EventBus()

@@ -1,5 +1,6 @@
 import asyncio
-from typing import List, Dict, Callable, Set
+from typing import Callable, Dict, List, Set
+
 from mirai_onebot.utils import logging
 
 logger = logging.getLogger(__name__)
