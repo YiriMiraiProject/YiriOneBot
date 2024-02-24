@@ -1,6 +1,6 @@
 # YiriMiraiOneBot
 
-![OneBot: 12 (shields.io)](https://img.shields.io/badge/OneBot-12-black)![GitHub License](https://img.shields.io/github/license/YiriMiraiProject/YiriMiraiOneBot)![GitHub Repo stars](https://img.shields.io/github/stars/YiriMiraiProject/YiriMiraiOneBot)
+![OneBot: 12 (shields.io)](https://img.shields.io/badge/OneBot-12-black) ![GitHub License](https://img.shields.io/github/license/YiriMiraiProject/YiriMiraiOneBot) ![GitHub Repo stars](https://img.shields.io/github/stars/YiriMiraiProject/YiriMiraiOneBot) [![codecov](https://codecov.io/gh/XYCode-Kerman/YiriMiraiOneBot/graph/badge.svg?token=6ZBJ2BfX4B)](https://codecov.io/gh/XYCode-Kerman/YiriMiraiOneBot)
 
 YiriMiraiOneBot是一个OneBot 12协议上的Python SDK，延续YiriMirai项目轻量级、低耦合的编码风格。
 

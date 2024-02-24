@@ -44,3 +44,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
           slug: XYCode-Kerman/YiriMiraiOneBot
+          env_vars: OS,PYTHON
