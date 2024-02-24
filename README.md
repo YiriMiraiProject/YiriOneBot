@@ -1,18 +1,17 @@
 # YiriMiraiOneBot
 
-![OneBot: 12 (shields.io)](https://img.shields.io/badge/OneBot-12-black)![GitHub License](https://img.shields.io/github/license/YiriMiraiProject/YiriMiraiOneBot)![GitHub Repo stars](https://img.shields.io/github/stars/YiriMiraiProject/YiriMiraiOneBot)
+![OneBot: 12 (shields.io)](https://img.shields.io/badge/OneBot-12-black) ![GitHub License](https://img.shields.io/github/license/YiriMiraiProject/YiriMiraiOneBot) ![GitHub Repo stars](https://img.shields.io/github/stars/YiriMiraiProject/YiriMiraiOneBot) [![codecov](https://codecov.io/gh/XYCode-Kerman/YiriMiraiOneBot/graph/badge.svg?token=6ZBJ2BfX4B)](https://codecov.io/gh/XYCode-Kerman/YiriMiraiOneBot)
 
 YiriMiraiOneBot是一个OneBot 12协议上的Python SDK，延续YiriMirai项目轻量级、低耦合的编码风格。
 
 > 警告：YiriMiraiOneBot正处于开发状态，请勿将其用于生产环境。
 
 ## 功能
-<details>
 * 适配器
   * [ ] HTTP适配器
   * [ ] HTTP Webhook适配器
   * [ ] 正向WebSocket适配器
-  * [ ] 反向Websocket适配器
+  * [x] 反向Websocket适配器
 * 消息类型
   * [ ] Text
   * [ ] Image
@@ -45,7 +44,6 @@ YiriMiraiOneBot是一个OneBot 12协议上的Python SDK，延续YiriMirai项目�
     * [ ] 群组动作
   * [ ] 文件接口
     * [ ] 文件动作
-    </details>
 
 ## 安装
 

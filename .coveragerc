@@ -1,0 +1,5 @@
+[run]
+omit =
+    test/*
+    vscode_pytest/*
+    typing_extensions.py
