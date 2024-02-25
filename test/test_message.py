@@ -1,6 +1,9 @@
+import pytest
+
 from mirai_onebot.message import (Audio, File, Image, Location, Mention,
                                   MentionAll, MessageChain, Reply, Text, Video,
                                   Voice)
+from mirai_onebot.message.message_components import MessageComponent
 
 
 def test_comps():
@@ -28,6 +31,77 @@ def test_comps():
     assert Video('test').file_id == 'test'
     assert Voice('test').file_id == 'test'
     assert Voice('test') == Voice
+
+    for comp in [
+        {
+            "type": "text",
+            "data": {
+                "text": "OneBot is not a bot"
+            }
+        },
+        {
+            "type": "mention",
+            "data": {
+                "user_id": "1234567"
+            }
+        },
+        {
+            "type": "mention_all",
+            "data": {}
+        },
+        {
+            "type": "image",
+            "data": {
+                "file_id": "e30f9684-3d54-4f65-b2da-db291a477f16"
+            }
+        },
+        {
+            "type": "voice",
+            "data": {
+                "file_id": "e30f9684-3d54-4f65-b2da-db291a477f16"
+            }
+        },
+        {
+            "type": "audio",
+            "data": {
+                "file_id": "e30f9684-3d54-4f65-b2da-db291a477f16"
+            }
+        },
+        {
+            "type": "video",
+            "data": {
+                "file_id": "e30f9684-3d54-4f65-b2da-db291a477f16"
+            }
+        },
+        {
+            "type": "file",
+            "data": {
+                "file_id": "e30f9684-3d54-4f65-b2da-db291a477f16"
+            }
+        },
+        {
+            "type": "location",
+            "data": {
+                "latitude": 31.032315,
+                "longitude": 121.447127,
+                "title": "上海交通大学闵行校区",
+                "content": "中国上海市闵行区东川路800号"
+            }
+        },
+        {
+            "type": "reply",
+            "data": {
+                "message_id": "6283",
+                "user_id": "1234567"
+            }
+        }
+    ]:
+        msgComp = MessageComponent.load_from_dict(comp)
+        assert msgComp.message_type == comp['type']
+        assert msgComp.data == comp['data']
+
+    with pytest.raises(ValueError):
+        MessageComponent.load_from_dict({'type': 'fake'})
 
 
 def test_message_chain():
@@ -57,4 +131,19 @@ def test_message_chain():
         comp.append(item)
 
     assert len(comp) == len(message_chain.components)
-    assert message_chain.to_message_chain().__len__() == len(message_chain.components)
+    assert message_chain.to_dict().__len__() == len(message_chain.components)
+
+    message_chain = MessageChain.load_from_dict({
+        'message': [
+            {
+                'type': 'text',
+                'data': {
+                    'text': 'OneBot is not a bot'
+                }
+            }
+        ]
+    })
+
+    assert message_chain[0].message_type == 'text'
+    assert message_chain[0].data == {'text': 'OneBot is not a bot'}
+    assert message_chain[0].text == 'OneBot is not a bot'

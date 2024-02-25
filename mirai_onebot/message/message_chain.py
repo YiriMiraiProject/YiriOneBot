@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import List, Union
 
 from mirai_onebot.message.message_components import (Audio, File, Image,
@@ -33,7 +35,50 @@ class MessageChain(object):
     def extend(self, comp: Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]):
         self.components.extend(comp)
 
-    def to_message_chain(self):
+    @staticmethod
+    def load_from_dict(data: Union[list, dict]) -> MessageChain:
+        """从字典/列表加载为MessageChain类
+
+        Examples:
+            1. 直接传入列表
+                [
+                    {
+                        "type": "text",
+                        "data": {
+                            "text": "OneBot is not a bot"
+                        }
+                    }
+                ]
+            2. 传入字典
+                {
+                    "message": [
+                        {
+                            "type": "text",
+                            "data": {
+                                "text": "OneBot is not a bot"
+                            }
+                        }
+                    ]
+                }
+
+            以上两种方式等价。
+
+        Raises:
+            KeyError: 未提供正确的数据
+            ValueError: 无法解析消息组件时抛出
+
+        Args:
+            data (Union[list, dict]): 数据
+
+        Returns:
+            MessageChain: 加载后
+        """
+        if type(data) == dict:
+            data = data['message']
+
+        return [MessageComponent.load_from_dict(x) for x in data]
+
+    def to_dict(self):
         return [x.to_dict() for x in self.components]
 
     def has(self, comp: Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]) -> bool:
