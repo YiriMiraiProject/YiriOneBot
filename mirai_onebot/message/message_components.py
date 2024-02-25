@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from abc import ABC
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 
 class MessageComponent(ABC):
@@ -17,6 +19,53 @@ class MessageComponent(ABC):
             'type': self.message_type,
             'data': self.data
         }
+
+    @staticmethod
+    def load_from_dict(data: dict) -> Union[Text, Mention, MentionAll, Image, Voice, Audio, Video, File, Location, Reply]:
+        """从字典加载为消息组件
+
+        Examples:
+            load_from_dict({
+                "type": "text",
+                "data": {
+                    "text": "OneBot is not a bot"
+                }
+            })
+
+        Args:
+            data (dict): 字典
+
+        Raises:
+            KeyError: 未提供正确的数据
+            ValueError: 未传入正确的message_type
+
+        Returns:
+            MessageComponent: 加载后的消息组件
+        """
+
+        message_type = data.get('type')
+        if message_type == 'text':
+            return Text(data['data']['text'])
+        elif message_type == 'mention':
+            return Mention(data['data']['user_id'])
+        elif message_type == 'mention_all':
+            return MentionAll()
+        elif message_type == 'image':
+            return Image(data['data']['file_id'])
+        elif message_type == 'voice':
+            return Voice(data['data']['file_id'])
+        elif message_type == 'audio':
+            return Audio(data['data']['file_id'])
+        elif message_type == 'video':
+            return Video(data['data']['file_id'])
+        elif message_type == 'file':
+            return File(data['data']['file_id'])
+        elif message_type == 'location':
+            return Location(data['data']['latitude'], data['data']['longitude'], data['data']['title'], data['data']['content'])
+        elif message_type == 'reply':
+            return Reply(data['data']['message_id'], data['data'].get('user_id', None))
+        else:
+            raise ValueError(f"Unknown message type: {message_type}")
 
     def __repr__(self) -> str:
         return f'{self.message_type}: {self.data}'
@@ -107,7 +156,7 @@ class Audio(MessageComponent):
     提示：音频消息段和语音消息段的区别是：语音消息段在聊天软件中表现为用户当场录制的声音，而音频消息段可能是直接发送的一个音乐文件，在消息列表中显示为可播放。
     """
 
-    message_type: str = 'image'
+    message_type: str = 'audio'
     """消息类型（为避免与built-in函数type冲突，命名为message_type）"""
     file_id: str
     """音频文件 ID"""
