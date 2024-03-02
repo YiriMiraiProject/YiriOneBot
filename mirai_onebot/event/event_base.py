@@ -10,7 +10,7 @@ class EventBase(ABC):
     def __init__(self) -> None:
         super().__init__()
 
-    @abstractmethod
+    # @abstractmethod
     @staticmethod
     def load_from_dict(data: dict) -> EventBase:
         """从字典加载为事件类
