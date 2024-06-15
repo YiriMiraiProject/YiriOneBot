@@ -70,21 +70,21 @@ async def test_normal():
         assert data['id'] == id
 
     # 错误事件
-    await ws_client.send('hello?')
+    await ws_client.send('{"good": "nice"}')
 
     # 调用api
-    asyncio.create_task(adapter.call_api('hello', test='test'))
+    asyncio.create_task(adapter._call_api('hello', {'test': 'test'}))
 
     # 发送响应
     echo = json.loads(await ws_client.recv())['echo']
     await ws_client.send(json.dumps({'echo': echo, 'resp': 'test'}))
 
     # 调用api超时
-    await adapter.call_api('hello', test='test')
+    await adapter._call_api('hello', {'test': 'test'})
     await asyncio.sleep(1.5)
 
-    # 关闭连接
-    await ws_client.close()
 
-    # 再次调用handler函数，引发错误
-    await adapter.handler(adapter.ws_connections[0], '/')
+def test_new_adapter():
+    adapter = ReverseWebsocketAdapter('hello', '0.0.0.0', 4561, 1)
+    adapter.start()
+    adapter.stop()

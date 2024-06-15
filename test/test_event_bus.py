@@ -28,8 +28,8 @@ async def test_subscribe():
 
     bus.subscribe('print_message', handle_print_message)
 
-    await bus.emit(MessageGroupEvent)
-    await bus.emit('print_message', 'hello')
+    await bus.emit(MessageGroupEvent, background=False)
+    await bus.emit(event='print_message', background=False, message='hello')
 
     assert run1 is True
     assert run2 is True
@@ -60,7 +60,7 @@ async def test_emit():
         global run2
         run2 = True
 
-    await bus.emit('test3')
+    await bus.emit('test3', background=False)
 
     assert run1 is True
     assert run2 is True
