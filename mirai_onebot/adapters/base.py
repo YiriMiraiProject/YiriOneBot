@@ -16,6 +16,12 @@ class Adapter(ApiProvider):
         super().__init__()
         self.access_token = access_token
 
+    def start(self):
+        """启动适配器，不阻塞"""
+
+    def stop(self):
+        """停止适配器"""
+
     def register_event_bus(self, bus: EventBus):
         self.buses.add(bus)
 

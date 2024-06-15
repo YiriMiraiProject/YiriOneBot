@@ -1,10 +1,13 @@
 import asyncio
 import json
 import uuid
-from typing import List
+from typing import List, Optional
 from urllib.parse import parse_qs, urlparse
 
 import websockets
+import websockets.frames
+import websockets.legacy
+import websockets.legacy.server
 
 from mirai_onebot.adapters.base import Adapter
 from mirai_onebot.utils import logging
@@ -27,12 +30,21 @@ class ReverseWebsocketAdapter(Adapter):
         self.host = host
         self.port = port
         self.timeout = timeout
+        self.server: Optional[websockets.legacy.server.Serve] = None
         self.ws_connections: List[websockets.WebSocketServerProtocol] = []
 
-        asyncio.create_task(self.start_server())
+    def start(self):
+        async def start_server():
+            self.server = await websockets.serve(self.handler, self.host, self.port)
 
-    async def start_server(self):
-        await websockets.serve(self.handler, self.host, self.port)
+        asyncio.get_event_loop().create_task(start_server())
+
+    def stop(self):
+        if self.server is None:
+            return
+
+        for ws in self.ws_connections:
+            asyncio.get_event_loop().run_until_complete(ws.close())
 
     async def handler(self, websocket: websockets.WebSocketServerProtocol, path: str):
         # 检测OneBot标准版本
@@ -67,16 +79,25 @@ class ReverseWebsocketAdapter(Adapter):
                     break
         else:
             logger.warning('一个OneBot实现在建立的过程中未正确传递 access_token，请检查设置。')
-            await websocket.close(401, 'Unauthorized')
+            await websocket.close(websockets.frames.CloseCode.NORMAL_CLOSURE, 'Unauthorized')
 
     async def recv(self, websocket: websockets.WebSocketServerProtocol):
-        """监听WS客户端消息"""
+        """监听WS客户端消息。
+
+        响应类消息在 interal_event_bus 触发 onebot_resp 事件。
+
+        事件类消息在 外部事件总线 触发 onebot_event 事件。
+        """
         if websocket.closed:
             raise ConnectionResetError("连接已关闭")
 
         # 解析错误
         try:
-            data = json.loads(await websocket.recv())
+            try:
+                data = json.loads(await websocket.recv())
+            except websockets.exceptions.ConnectionClosedOK:
+                raise ConnectionResetError("连接已关闭")
+
             if not isinstance(data, dict):
                 logger.warning(f'OneBot 实现 {websocket.remote_address[0]} 发送了非字典数据 {data}。')
                 return None
