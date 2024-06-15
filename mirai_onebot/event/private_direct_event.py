@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Literal, Union
-
 from mirai_onebot.event.event_base import EventBase
 from mirai_onebot.message import MessageChain
 
@@ -21,12 +19,13 @@ class MessagePrivateEvent(EventBase):
         super().__init__()
 
     @staticmethod
-    def load_from_dict(data: dict) -> MessageChain:
+    def load_from_dict(data: dict) -> MessagePrivateEvent:
         event = MessagePrivateEvent()
         event.message_id = data['message_id']
         event.message = MessageChain.load_from_dict(data)
         event.alt_message = data.get('alt_message', '')
         event.user_id = data['user_id']
+        return event
 
 
 class NoticeFriendIncreaseEvent(EventBase):

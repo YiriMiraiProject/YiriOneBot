@@ -70,11 +70,13 @@ class MessageComponent(ABC):
     def __repr__(self) -> str:
         return f'{self.message_type}: {self.data}'
 
-    def __eq__(self, __value: object) -> bool:
-        if isinstance(__value, MessageComponent):
+    def __eq__(self, __value: MessageComponent) -> bool:  # type: ignore
+        if isinstance(__value, MessageComponent):  # 实例化的
             return self.message_type == __value.message_type and self.data == __value.data
-        elif isinstance(__value, type):
-            return self.message_type == __value.message_type
+        elif isinstance(__value, type):  # 未实例化
+            return isinstance(self, __value)
+        else:
+            raise ValueError("Can't compare MessageComponent with non-MessageComponent object")
 
 
 class Text(MessageComponent):
@@ -93,9 +95,10 @@ class Text(MessageComponent):
     def __eq__(self, __value: object) -> bool:
         if isinstance(__value, str):
             return self.text == __value
-
-        if isinstance(__value, Text):
+        elif isinstance(__value, Text):
             return self.text == __value.text
+        else:
+            raise ValueError("Can't compare Text with non-Text object")
 
 
 class Mention(MessageComponent):

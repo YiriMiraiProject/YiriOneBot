@@ -32,7 +32,7 @@ class MessageChain(object):
     def append(self, comp: Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]):
         self.components.append(comp)
 
-    def extend(self, comp: Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]):
+    def extend(self, comp: List[Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]]):
         self.components.extend(comp)
 
     @staticmethod
@@ -73,10 +73,10 @@ class MessageChain(object):
         Returns:
             MessageChain: 加载后
         """
-        if type(data) == dict:
+        if isinstance(data, dict):
             data = data['message']
 
-        return [MessageComponent.load_from_dict(x) for x in data]
+        return MessageChain([MessageComponent.load_from_dict(x) for x in data])
 
     def to_dict(self):
         return [x.to_dict() for x in self.components]
@@ -94,7 +94,7 @@ class MessageChain(object):
         # 未实例化
         if isinstance(comp, type):
             for x in self.components:
-                if type(x) == comp:
+                if type(x) == comp:  # noqa: E721
                     result = True
 
         # 实例化
@@ -118,7 +118,7 @@ class MessageChain(object):
     def __next__(self):
         try:
             result = self.components[self._idx]
-        except:
+        except IndexError:
             raise StopIteration
 
         self._idx += 1

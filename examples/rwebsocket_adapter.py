@@ -2,8 +2,8 @@
 import sys
 
 sys.path.append('..')
-from mirai_onebot.adapters import ReverseWebsocketAdapter
-from mirai_onebot.event import EventBus
+from mirai_onebot.adapters import ReverseWebsocketAdapter  # noqa: E402
+from mirai_onebot.event import EventBus  # noqa: E402
 
 bus = EventBus()
 

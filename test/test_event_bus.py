@@ -1,7 +1,6 @@
 import pytest
 
 from mirai_onebot.event import EventBus, MessageGroupEvent
-from mirai_onebot.event.event_base import EventBase
 from mirai_onebot.event.group_event import (NoticeGroupMemberDecreaseEvent,
                                             NoticeGroupMemberIncreaseEvent,
                                             NoticeGroupMessageDeleteEvent)
@@ -32,8 +31,8 @@ async def test_subscribe():
     await bus.emit(MessageGroupEvent)
     await bus.emit('print_message', 'hello')
 
-    assert run1 == True
-    assert run2 == True
+    assert run1 is True
+    assert run2 is True
 
 
 def test_unsubscribe():
@@ -63,8 +62,8 @@ async def test_emit():
 
     await bus.emit('test3')
 
-    assert run1 == True
-    assert run2 == True
+    assert run1 is True
+    assert run2 is True
 
 
 def test_events():
@@ -210,4 +209,4 @@ def test_events():
             "user_id": "123456788"
         }
     }.items():
-        e = event().load_from_dict(data)
+        event().load_from_dict(data)

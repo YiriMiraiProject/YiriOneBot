@@ -1,7 +1,7 @@
 import asyncio
 import json
 import uuid
-from typing import List, Literal, Union
+from typing import List
 from urllib.parse import parse_qs, urlparse
 
 import websockets
@@ -120,7 +120,7 @@ class ReverseWebsocketAdapter(Adapter):
 
                 return tmp
             except (asyncio.CancelledError, asyncio.TimeoutError):
-                logger.error(f'发送、接收OneBot实现消息时超时。')
+                logger.error('发送、接收OneBot实现消息时超时。')
                 return -1
 
         tasks = [call_server(ws_connection)

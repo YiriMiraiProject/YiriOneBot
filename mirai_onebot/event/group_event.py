@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from mirai_onebot.event.event_base import EventBase
 from mirai_onebot.message import MessageChain

@@ -12,22 +12,20 @@ from mirai_onebot.event.bus import EventBus
 
 @pytest.mark.asyncio
 async def test_old_onebot():
-    adapter = ReverseWebsocketAdapter('hello', '0.0.0.0', 4561, 10)
 
     await asyncio.sleep(0.2)
 
-    ws_client = await websockets.connect('ws://127.0.0.1:4561', extra_headers={
+    await websockets.connect('ws://127.0.0.1:4561', extra_headers={
         'Sec-WebSocket-Protocol': '11.test'
     })
 
 
 @pytest.mark.asyncio
 async def test_new_onebot():
-    adapter = ReverseWebsocketAdapter('hello', '0.0.0.0', 4562, 10)
 
     await asyncio.sleep(0.2)
 
-    ws_client = await websockets.connect('ws://127.0.0.1:4562', extra_headers={
+    await websockets.connect('ws://127.0.0.1:4562', extra_headers={
         'Sec-WebSocket-Protocol': '13.test'
     })
 
@@ -70,7 +68,7 @@ async def test_normal():
     await ws_client.send('hello?')
 
     # 调用api
-    call = asyncio.create_task(adapter.call_api('hello', test='test'))
+    asyncio.create_task(adapter.call_api('hello', test='test'))
 
     # 发送响应
     echo = json.loads(await ws_client.recv())['echo']

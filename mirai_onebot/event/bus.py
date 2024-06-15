@@ -1,5 +1,5 @@
 import asyncio
-from typing import Callable, Dict, List, Set, Union
+from typing import Callable, Dict, Set, Union
 
 from mirai_onebot.event.event_base import EventBase
 from mirai_onebot.utils import logging
