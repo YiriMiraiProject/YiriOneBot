@@ -17,6 +17,8 @@ from mirai_onebot.api.interfaces.message import (  # noqa: E402
 from mirai_onebot.event.group_event import MessageGroupEvent  # noqa: E402
 from mirai_onebot.event.private_direct_event import \
     MessagePrivateEvent  # noqa: E402
+from mirai_onebot.message.message_chain import MessageChain  # noqa: E402
+from mirai_onebot.message.message_components import Text  # noqa: E402
 
 bot = Bot(
     adapter=ReverseWebsocketAdapter(
@@ -34,12 +36,9 @@ async def handle_message_group(event: MessageGroupEvent):
         params=SendMessageRequestParams(
             detail_type="group",
             group_id=event.group_id,
-            message=[{
-                "type": "text",
-                "data": {
-                    "text": "我是文字巴拉巴拉巴拉"
-                }
-            }]
+            message=MessageChain([
+                Text('你好')
+            ]).to_dict()
         ),
         self=None
     ), SendMessageResponse)
