@@ -64,8 +64,22 @@ WIP...
 
 ## 参与开发
 
-参与 YiriMiraiOneBot 的开发，需要遵循 < u > 开发守则（WIP）</u>，并为新添加的代码提供测试代码。
+参与 YiriMiraiOneBot 的开发，需要遵循开发守则（WIP），并为新添加的代码提供测试代码。
 
 ## 开源协议
 
-本项目采用 AGPL-3.0 协议。请注意，AGPL-3.0 是传染性协议。如果你的项目引用了 YiriMiraiOneBot，请在发布时公开源代码，并同样采用 AGPL-3.0 协议。
+本项目采用 LGPL-3.0、Anti-996 许可证开源，因此使用本项目时，你需要注意以下几点：
+
+1. 你可以自由的在代码中以`import`的形式导入并使用 YiriMiraiOneBot 提供的功能，**而不需要开源你使用 YiriMiraiOneBot 编写的业务代码**。
+
+2. 如果你对 YiriMiraiOneBot 的代码进行了修改，**你需要同时发布你修改后的 YiriMiraiOneBot**。
+
+3. 如果你引用或修改了本库中的代码（包括`import`本库），你就必须**遵守你所在司法管辖区与劳动和就业相关法律、法规、规则和标准**。
+
+   如果该司法管辖区没有此类法律、法规、规章和标准或其法律、法规、规章和标准不可执行，则你**必须遵守国际劳工标准的核心公约**。
+
+4. 使用`0d8f2f`提交以前的代码时，请遵循 AGPL-3.0 协议。
+
+5. 有关LGPL-3.0许可证的更多详细信息，请参见 [GNU 宽通用公共许可证 v3.0 - GNU 工程 - 自由软件基金会](https://www.gnu.org/licenses/lgpl-3.0.html)。
+
+6. 有关Anti-996许可证的更多详细信息，请参见[Anti-996 License Version 1.0](https://github.com/kattgu7/Anti-996-License)和[996.ICU](https://996.icu/#/zh_CN)。
