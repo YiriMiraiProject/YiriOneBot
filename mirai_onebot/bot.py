@@ -1,13 +1,15 @@
 import asyncio
 import logging
-from typing import Callable, List, Optional, Type, Union
+from typing import Callable, List, Optional, Type, TypeVar, Union
 
 from mirai_onebot.adapters.base import Adapter
+from mirai_onebot.api.interfaces.base import BotSelf, Request, Response
 from mirai_onebot.event import SLUG_TO_EVENT
 from mirai_onebot.event.bus import EventBus
 from mirai_onebot.event.event_base import EventBase
 
 logger = logging.getLogger(__name__)
+ResponseT = TypeVar('ResponseT', bound=Response)
 
 
 class Bot(object):
@@ -101,3 +103,19 @@ class Bot(object):
             event (Union[Type[EventBase], str]): 事件
         """
         return self.bus.on(event)
+
+    async def call(self, request: Request, response_type: Type[ResponseT], auto_set_self=True) -> ResponseT:
+        """调用API
+
+        Args:
+            request (Request): 请求
+            response_type (Type[Response]): 返回类型
+            auto_set_self (bool, optional): 自动设置请求中的 self，要求 bot_user_id 和 bot_platform 不为 None. Defaults to True.
+
+        Returns:
+            Response: 调用返回值
+        """
+        if auto_set_self and self.bot_platform is not None and self.bot_user_id is not None:
+            request.self = BotSelf(platform=self.bot_platform, user_id=self.bot_user_id)
+
+        return await self.adapter.call(request, response_type)

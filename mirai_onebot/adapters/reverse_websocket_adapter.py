@@ -1,7 +1,7 @@
 import asyncio
 import json
-import uuid
-from typing import List, Optional
+import secrets
+from typing import Any, Dict, List, Optional, Union
 from urllib.parse import parse_qs, urlparse
 
 import websockets
@@ -97,7 +97,6 @@ class ReverseWebsocketAdapter(Adapter):
                 data = json.loads(await websocket.recv())
             except websockets.exceptions.ConnectionClosedOK:
                 raise ConnectionResetError("连接已关闭")
-
             if not isinstance(data, dict):
                 logger.warning(f'OneBot 实现 {websocket.remote_address[0]} 发送了非字典数据 {data}。')
                 return None
@@ -113,47 +112,36 @@ class ReverseWebsocketAdapter(Adapter):
             # 触发事件
             await self.emit('onebot_event', data)
 
-    async def call_api(self, api: str, **params):
-        """调用API
+    async def _call_api(self, action: str, params: dict, echo: str = secrets.token_hex(8)) -> Union[Dict[str, Any], None]:
+        """内部接口。直接调用API。本接口只发送给第一个连接的客户端。
 
-        Returns: 一个数组，包含每个OneBot实现的返回值。
+        Args:
+            action (str): 参见父类
+            params (dict): 参见父类
+            echo (str, optional): 参见父类. Defaults to secrets.token_hex(8).
         """
-        data = {
-            'action': api,
-            'params': params
-        }
 
-        async def call_server(ws_connection: websockets.WebSocketServerProtocol):
-            echo = uuid.uuid4().__str__()
+        if len(self.ws_connections) == 0:
+            return None
 
-            try:
-                await asyncio.wait_for(ws_connection.send(json.dumps({
-                    **data,
-                    'echo': echo
-                })), timeout=self.timeout)
+        flag = asyncio.Event()
+        response: Optional[Dict[str, Any]] = None
 
-                # 注：不能同时调用两个recv函数，这里使用内部事件总线进行监听
-                # return await asyncio.wait_for(ws_connection.recv(), timeout=self.timeout)
-                tmp = None
-                recived_event = asyncio.Event()
+        @self._internal_event_bus.on('onebot_resp')
+        async def _on_resp(data: dict):
+            nonlocal response, flag
 
-                @self._internal_event_bus.on('onebot_resp')
-                async def subscriber(data: dict):
-                    if data['echo'] == echo:
-                        nonlocal tmp, recived_event
-                        tmp = data
-                        recived_event.set()
-                        self._internal_event_bus.unsubscribe(
-                            'onebot_resp', subscriber)
+            if data.get('echo', None) == echo:
+                self._internal_event_bus.unsubscribe('onebot_resp', _on_resp)
+                response = data
+                flag.set()
 
-                # 直到收到消息
-                await asyncio.wait_for(recived_event.wait(), timeout=self.timeout)
+        await self.ws_connections[0].send(json.dumps({
+            "action": action,
+            "params": params,
+            "echo": echo
+        }))
 
-                return tmp
-            except (asyncio.CancelledError, asyncio.TimeoutError):
-                logger.error('发送、接收OneBot实现消息时超时。')
-                return -1
+        await flag.wait()
 
-        tasks = [call_server(ws_connection)
-                 for ws_connection in self.ws_connections]
-        return await asyncio.gather(*tasks)
+        return response
