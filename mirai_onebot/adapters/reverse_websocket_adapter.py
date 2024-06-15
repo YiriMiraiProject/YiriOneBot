@@ -53,16 +53,18 @@ class ReverseWebsocketAdapter(Adapter):
 
         if protocol_str is None:
             logger.warning('未提供Sec-WebSocket-Protocol，可能出现兼容性问题。')
-            logger.warning('自动将 protocol 指定为 12.undefined。')
-            protocol_str = '12.undefined'
+            logger.warning('自动将 protocol 指定为 11.undefined。')
+            protocol_str = '11.undefined'
 
         protocol = protocol_str.split('.')
 
         if int(protocol[0]) > 12:
             logger.warning('不支持版本12以上的OneBot实现，可能出现兼容性问题。')
-        elif int(protocol[0]) < 12:
+        elif int(protocol[0]) < 11:
             logger.warning(
-                f'不支持版本12以下的OneBot实现，可能出现兼容性问题，请在调用api前查询对应OneBot {protocol[0]} 的接口定义。')
+                f'不支持版本11以下的OneBot实现，可能出现兼容性问题，请在调用api前查询对应OneBot {protocol[0]} 的接口定义。')
+        elif int(protocol[0]) == 11:
+            logger.warning('OneBot 11 的实现暂处于开发阶段，可能存在兼容性问题。')
 
         # 检测Access Token
         query = parse_qs(urlparse(websocket.path).query)
