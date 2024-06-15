@@ -1,3 +1,5 @@
+from typing import List
+
 from mirai_onebot.api.interfaces.base import (Request, RequestParams, Response,
                                               ResponseData)
 
@@ -28,7 +30,7 @@ class GetGroupListRequestParams(RequestParams):
 
 
 class GetGroupListResponseData(ResponseData):
-    group_list: list[GetGroupInfoResponseData]
+    group_list: List[GetGroupInfoResponseData]
 
 
 class GetGroupListRequest(Request):
@@ -69,7 +71,7 @@ class GetGroupMemberListRequestParams(RequestParams):
 
 
 class GetGroupMemberListResponseData(ResponseData):
-    member_list: list[GetGroupMemberInfoResponseData]
+    member_list: List[GetGroupMemberInfoResponseData]
 
 
 class GetGroupMemberListRequest(Request):

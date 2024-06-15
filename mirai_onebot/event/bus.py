@@ -47,7 +47,7 @@ class EventBus(object):
 
         return decorator
 
-    async def emit(self, event: Union[Type[EventBase], str], background: bool = True, *args, **kwargs) -> None:
+    async def emit(self, event: Union[Type[EventBase], str], *args, **kwargs) -> None:
         """触发事件
 
         Args:
@@ -58,5 +58,5 @@ class EventBus(object):
         if event in self._subscribers.keys():
             tasks = [asyncio.create_task(subscriber(*args, **kwargs))
                      for subscriber in self._subscribers[event]]
-            if not background:
+            if kwargs.get('background', True) is False:
                 await asyncio.wait(tasks)
