@@ -43,8 +43,10 @@ class ReverseWebsocketAdapter(Adapter):
         if self.server is None:
             return
 
+        tasks: List[asyncio.Task] = []
         for ws in self.ws_connections:
-            asyncio.get_event_loop().run_until_complete(ws.close())
+            tasks.append(asyncio.create_task(ws.close()))
+        asyncio.get_event_loop().run_until_complete(asyncio.wait(tasks))
 
     async def handler(self, websocket: websockets.WebSocketServerProtocol, path: str):
         # 检测OneBot标准版本

@@ -47,14 +47,16 @@ class EventBus(object):
 
         return decorator
 
-    async def emit(self, event: Union[Type[EventBase], str], *args, **kwargs) -> None:
+    async def emit(self, event: Union[Type[EventBase], str], background: bool = True, *args, **kwargs) -> None:
         """触发事件
 
         Args:
             event (str | Type[EventBase]): 事件
+            background (bool, optional): 是否在后台触发事件，设置为False会等待事件完成. Defaults to True.
             args/kwargs: 传递给事件处理器的参数
         """
         if event in self._subscribers.keys():
-            [asyncio.create_task(subscriber(*args, **kwargs))
-             for subscriber in self._subscribers[event]]
-            # await asyncio.wait(tasks)
+            tasks = [asyncio.create_task(subscriber(*args, **kwargs))
+                     for subscriber in self._subscribers[event]]
+            if not background:
+                await asyncio.wait(tasks)
