@@ -12,6 +12,8 @@ from mirai_onebot.event.bus import EventBus
 
 @pytest.mark.asyncio
 async def test_old_onebot():
+    adapter = ReverseWebsocketAdapter('hello', '0.0.0.0', 4561, 1)
+    adapter.start()
 
     await asyncio.sleep(0.2)
 
@@ -22,6 +24,8 @@ async def test_old_onebot():
 
 @pytest.mark.asyncio
 async def test_new_onebot():
+    adapter = ReverseWebsocketAdapter('hello', '0.0.0.0', 4562, 1)
+    adapter.start()
 
     await asyncio.sleep(0.2)
 
@@ -34,6 +38,7 @@ async def test_new_onebot():
 @pytest.mark.filterwarnings
 async def test_normal():
     adapter = ReverseWebsocketAdapter('hello', '0.0.0.0', 4563, 1)
+    adapter.start()
 
     await asyncio.sleep(0.2)
 

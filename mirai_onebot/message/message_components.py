@@ -98,7 +98,7 @@ class Text(MessageComponent):
         elif isinstance(__value, Text):
             return self.text == __value.text
         else:
-            raise ValueError("Can't compare Text with non-Text object")
+            return False
 
 
 class Mention(MessageComponent):
