@@ -3,6 +3,7 @@ import logging
 from typing import Callable, List, Optional, Type, Union
 
 from mirai_onebot.adapters.base import Adapter
+from mirai_onebot.api.interfaces.base import Request, Response
 from mirai_onebot.event import SLUG_TO_EVENT
 from mirai_onebot.event.bus import EventBus
 from mirai_onebot.event.event_base import EventBase
@@ -101,3 +102,6 @@ class Bot(object):
             event (Union[Type[EventBase], str]): 事件
         """
         return self.bus.on(event)
+
+    async def call(self, request: Request, response_type: Type[Response]):
+        return await self.adapter.call(request, response_type)

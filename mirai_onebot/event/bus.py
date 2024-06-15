@@ -55,6 +55,6 @@ class EventBus(object):
             args/kwargs: 传递给事件处理器的参数
         """
         if event in self._subscribers.keys():
-            tasks = [asyncio.create_task(subscriber(*args, **kwargs))
-                     for subscriber in self._subscribers[event]]
-            await asyncio.wait(tasks)
+            [asyncio.create_task(subscriber(*args, **kwargs))
+             for subscriber in self._subscribers[event]]
+            # await asyncio.wait(tasks)

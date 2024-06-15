@@ -31,6 +31,6 @@ class Adapter(ApiProvider):
         Args:
             event (str): 事件
         """
-        tasks = [asyncio.create_task(
+        [asyncio.create_task(
             bus.emit(event, *args, **kwargs)) for bus in self.buses]
-        await asyncio.gather(*tasks)
+        # await asyncio.gather(*tasks)
