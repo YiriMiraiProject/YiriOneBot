@@ -1,12 +1,17 @@
+from typing import Any, Dict, List, Literal, Optional
+
 from mirai_onebot.api.interfaces.base import (Request, RequestParams, Response,
                                               ResponseData)
 
 
 # ========= SendMessage =========
 class SendMessageRequestParams(RequestParams):
-    detail_type: str
-    group_id: str  # 用于群组消息
-    message: list[dict]
+    detail_type: Literal['private', 'group', 'channel']
+    group_id: Optional[str] = None  # 用于群组消息
+    user_id: Optional[str] = None   # 用于私聊消息
+    guild_id: Optional[str] = None  # 用于频道消息
+    channel_id: Optional[str] = None  # 用于频道消息
+    message: List[Dict[str, Any]]
 
 
 class SendMessageResponseData(ResponseData):
