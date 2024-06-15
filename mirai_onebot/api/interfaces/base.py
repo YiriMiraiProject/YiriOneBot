@@ -21,7 +21,7 @@ class Request(BaseModel):
     action: str
     params: RequestParams
     echo: Optional[str] = Field(default_factory=lambda: secrets.token_hex(8))
-    self: Optional[BotSelf]
+    self: Optional[BotSelf] = None
 
 
 class Response(BaseModel):

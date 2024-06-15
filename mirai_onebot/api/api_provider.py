@@ -24,5 +24,5 @@ class ApiProvider(abc.ABC):
         Args:
             api (Request): API接口
         """
-        resp = await self._call_api(request.action, request.params.model_dump(mode='json'), request.echo)
+        resp = await self._call_api(request.action, request.params.model_dump(mode='json'), request.echo if request.echo is not None else secrets.token_hex(8))
         return response_type.model_validate(resp)
