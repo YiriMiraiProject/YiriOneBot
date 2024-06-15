@@ -36,8 +36,16 @@ class ReverseWebsocketAdapter(Adapter):
 
     async def handler(self, websocket: websockets.WebSocketServerProtocol, path: str):
         # 检测OneBot标准版本
-        protocol = websocket.request_headers.get(
-            'Sec-WebSocket-Protocol').split('.')
+        protocol_str = websocket.request_headers.get(
+            'Sec-WebSocket-Protocol')
+
+        if protocol_str is None:
+            logger.warning('未提供Sec-WebSocket-Protocol，可能出现兼容性问题。')
+            logger.warning('自动将 protocol 指定为 12.undefined。')
+            protocol_str = '12.undefined'
+
+        protocol = protocol_str.split('.')
+
         if int(protocol[0]) > 12:
             logger.warning('不支持版本12以上的OneBot实现，可能出现兼容性问题。')
         elif int(protocol[0]) < 12:
@@ -68,8 +76,10 @@ class ReverseWebsocketAdapter(Adapter):
 
         # 解析错误
         try:
-            data = await websocket.recv()
-            data: dict = json.loads(data)
+            data = json.loads(await websocket.recv())
+            if not isinstance(data, dict):
+                logger.warning(f'OneBot 实现 {websocket.remote_address[0]} 发送了非字典数据 {data}。')
+                return None
         except json.JSONDecodeError:
             logger.warning(
                 f'无法解析 OneBot 实现 {websocket.remote_address[0]} 的消息 {data}。')
