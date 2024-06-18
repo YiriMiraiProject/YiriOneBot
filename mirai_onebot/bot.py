@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import Callable, List, Optional, Type, TypeVar, Union
+from typing import Callable, Optional, Type, TypeVar, Union
 
 from mirai_onebot.adapters.base import Adapter
 from mirai_onebot.api.interfaces.base import BotSelf, Request, Response
@@ -17,16 +17,16 @@ class Bot(object):
         self,
         adapter: Adapter,
         bus: Optional[EventBus] = None,
-        bot_platform: Optional[List[str]] = None,
-        bot_user_id: Optional[List[str]] = None
+        bot_platform: Optional[str] = None,
+        bot_user_id: Optional[str] = None
     ) -> None:
         """MiraiOneBot 高级类，用于处理事件、发送消息。用户应该直接基于该类进行开发
 
         Args:
             adapter (Adapter): 适配器
             bus (Optional[EventBus], optional): 事件总线，不填自动创建一个事件总线
-            bot_platform (Optional[List[str]], optional): 机器人平台，不填自动接收所有 OneBot 实现发来的事件
-            bot_user_id (Optional[List[str]], optional): 机器人id，不填自动接收所有 OneBot 实现发来的事件
+            bot_platform (Optional[str], optional): 机器人平台，不填自动接收所有 OneBot 实现发来的事件
+            bot_user_id (Optional[str], optional): 机器人id，不填自动接收所有 OneBot 实现发来的事件
         """
 
         self.adapter = adapter
@@ -49,11 +49,11 @@ class Bot(object):
         """
         # 筛选自身事件
         if self.bot_platform is not None and 'self' in data.keys():
-            if data['self']['platform'] not in self.bot_platform:
+            if data['self']['platform'] != self.bot_platform:
                 return
 
         if self.bot_user_id is not None and 'self' in data.keys():
-            if data['self']['user_id'] not in self.bot_user_id:
+            if data['self']['user_id'] != self.bot_platform:
                 return
 
         # 解析
