@@ -3,8 +3,13 @@ from typing import Any, Dict, List, Literal, Optional
 from mirai_onebot.api.interfaces.base import (Request, RequestParams, Response,
                                               ResponseData)
 
+__all__ = [
+    'SendMessageRequest', 'SendMessageResponse', 'SendMessageRequestParams', 'SendMessageResponseData', 'DeleteMessageRequest', 'DeleteMessageResponse', 'DeleteMessageRequestParams'
+]
 
 # ========= SendMessage =========
+
+
 class SendMessageRequestParams(RequestParams):
     detail_type: Literal['private', 'group', 'channel']
     group_id: Optional[str] = None  # 用于群组消息
