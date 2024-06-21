@@ -120,6 +120,14 @@ YiriMirai OneBot 按**"原样 "**提供，不提供任何**担保**。使用风�
 5. 有关LGPL-3.0许可证的更多详细信息，请参见 [GNU 宽通用公共许可证 v3.0 - GNU 工程 - 自由软件基金会](https://www.gnu.org/licenses/lgpl-3.0.html)。
 6. 有关Anti-996许可证的更多详细信息，请参见[Anti-996 License Version 1.0](https://github.com/kattgu7/Anti-996-License)和[996.ICU](https://996.icu/#/zh_CN)。
 
+## 虚拟形象
+
+本项目的虚拟形象采用 **Stable Diffusion** 绘制，原画使用 CounterfeitXL-2.5 绘制，Lora 基于 SD 1.5 及以下版本。
+
+详情可见：[[Lora] Yiri - 0.0.1](https://tusiart.com/models/741735105371917919)。
+
+![](./docs/images/vtuber.png)
+
 ## 致谢
 
 在本项目的开发过程中，我们深受开源软件社区的启发和支持。没有这些无私的开源贡献者，我们的项目将无法实现。
