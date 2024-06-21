@@ -21,7 +21,7 @@ class MessageComponent(ABC):
         }
 
     @staticmethod
-    def load_from_dict(data: dict) -> Union[Text, Mention, MentionAll, Image, Voice, Audio, Video, File, Location, Reply]:
+    def load_from_dict(data: dict) -> MessageComponentsType:
         """从字典加载为消息组件
 
         Examples:
@@ -244,8 +244,11 @@ class Reply(MessageComponent):
         self.data['user_id'] = self.user_id
 
 
+MessageComponentsType = Union[Text, Mention, MentionAll, Image, Voice, Audio, Video, File, Location, Reply]
+
 __all__ = [
     'Text', 'Mention', 'MentionAll', 'Image',
     'Voice', 'Audio', 'Video', 'File',
-    'Location', 'Reply'
+    'Location', 'Reply',
+    'MessageComponentsType'
 ]

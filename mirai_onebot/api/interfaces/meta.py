@@ -2,8 +2,8 @@ from typing import List
 
 from pydantic import BaseModel
 
-from mirai_onebot.api.interfaces.base import (BotSelf, Request, Response,
-                                              ResponseData)
+from mirai_onebot.api.interfaces.base import (BotSelf, Request, RequestParams,
+                                              Response, ResponseData)
 
 
 # ========== GetStatus ==========
@@ -17,9 +17,13 @@ class GetStatusResponseData(ResponseData):
     bots: List[BotStatus]
 
 
+class GetStatusRequestParams(RequestParams):
+    pass
+
+
 class GetStatusRequest(Request):
     action: str = 'get_status'
-    params: dict = {}
+    params: GetStatusRequestParams = GetStatusRequestParams()
 
 
 class GetStatusResponse(Response):
