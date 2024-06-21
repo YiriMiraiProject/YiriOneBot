@@ -1,12 +1,19 @@
 import asyncio
 import logging
-from typing import Callable, Optional, Type, TypeVar, Union
+from typing import Callable, List, Optional, Type, TypeVar, Union
 
 from mirai_onebot.adapters.base import Adapter
 from mirai_onebot.api.interfaces.base import BotSelf, Request, Response
+from mirai_onebot.api.interfaces.message import (SendMessageRequest,
+                                                 SendMessageRequestParams,
+                                                 SendMessageResponse)
 from mirai_onebot.event import SLUG_TO_EVENT
 from mirai_onebot.event.bus import EventBus
 from mirai_onebot.event.event_base import EventBase
+from mirai_onebot.message.message_chain import MessageChain
+from mirai_onebot.message.message_components import (MessageComponent,
+                                                     MessageComponentsType,
+                                                     Text)
 
 logger = logging.getLogger(__name__)
 ResponseT = TypeVar('ResponseT', bound=Response)
@@ -119,3 +126,62 @@ class Bot(object):
             request.self = BotSelf(platform=self.bot_platform, user_id=self.bot_user_id)
 
         return await self.adapter.call(request, response_type)
+
+    # 简化 API
+    async def send_group_message(self, group_id: str, message: Union[MessageChain, str, List[str], List[MessageComponentsType]]):
+        """发送私聊消息
+
+        Args:
+            group_id (str): 群 id
+            message (Union[MessageChain, str, List[str], List[MessageComponentsType]]): 消息
+
+        Returns:
+            SendMessageResponseData: 返回值
+        """
+        if isinstance(message, str):
+            message_chain = MessageChain([Text(message)])
+        elif isinstance(message, list):
+            message_chain = MessageChain([
+                x if isinstance(x, MessageComponent) else Text(x)
+                for x in message
+            ])
+
+        return (await self.call(
+            request=SendMessageRequest(
+                params=SendMessageRequestParams(
+                    detail_type='group',
+                    group_id=group_id,
+                    message=message_chain.to_dict()
+                )
+            ),
+            response_type=SendMessageResponse
+        )).data
+
+    async def send_private_message(self, user_id: str, message: Union[MessageChain, str, List[str], List[MessageComponentsType]]):
+        """发送私聊消息
+
+        Args:
+            user_id (str): 用户 id
+            message (Union[MessageChain, str, List[str], List[MessageComponentsType]]): 消息
+
+        Returns:
+            SendMessageResponseData: 返回值
+        """
+        if isinstance(message, str):
+            message_chain = MessageChain([Text(message)])
+        elif isinstance(message, list):
+            message_chain = MessageChain([
+                x if isinstance(x, MessageComponent) else Text(x)
+                for x in message
+            ])
+
+        return await self.call(
+            request=SendMessageRequest(
+                params=SendMessageRequestParams(
+                    detail_type='private',
+                    user_id=user_id,
+                    message=message_chain.to_dict()
+                )
+            ),
+            response_type=SendMessageResponse
+        )

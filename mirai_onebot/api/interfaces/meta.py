@@ -5,8 +5,13 @@ from pydantic import BaseModel
 from mirai_onebot.api.interfaces.base import (BotSelf, Request, RequestParams,
                                               Response, ResponseData)
 
+__all__ = [
+    'GetStatusRequest', 'GetStatusResponse', 'GetStatusRequestParams', 'GetStatusResponseData', 'BotStatus'
+]
 
 # ========== GetStatus ==========
+
+
 class BotStatus(BaseModel):
     self: BotSelf
     online: bool

@@ -3,8 +3,16 @@ from typing import List
 from mirai_onebot.api.interfaces.base import (Request, RequestParams, Response,
                                               ResponseData)
 
+__all__ = [
+    "GetGroupInfoRequest", "GetGroupInfoResponse", "GetGroupInfoRequestParams", "GetGroupInfoResponseData",
+    "GetGroupListRequest", "GetGroupListResponse", "GetGroupListRequestParams", "GetGroupListResponseData",
+    "GetGroupMemberInfoRequest", "GetGroupMemberInfoResponse", "GetGroupMemberInfoRequestParams", "GetGroupMemberInfoResponseData",
+    "GetGroupMemberListRequest", "GetGroupMemberListResponse", "GetGroupMemberListRequestParams", "GetGroupMemberListResponseData",
+]
 
 # ========= GetGroupInfo =========
+
+
 class GetGroupInfoRequestParams(RequestParams):
     group_id: str
 
