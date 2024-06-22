@@ -1,10 +1,31 @@
 [tool.poetry]
-name = "yirimiraionebot"
+name = "yiri-mirai-onebot"
 version = "0.0.1"
 description = "YiriMiraiOneBot是一个OneBot 12协议上的Python SDK，延续YiriMirai项目轻量级、低耦合的编码风格。"
 authors = ["XYCode Kerman <xycode-xyc@outlook.com>"]
 license = "AGPL-3.0"
 readme = "README.md"
+homepage = "https://github.com/YiriMiraiProject/YiriMiraiOneBot"
+repository = "https://github.com/YiriMiraiProject/YiriMiraiOneBot"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Topic :: Communications",
+  "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+  "Framework :: AsyncIO",
+
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+
+[[tool.poetry.packages]]
+include = "mirai_onebot"
 
 [tool.poetry.dependencies]
 python = ">=3.8"

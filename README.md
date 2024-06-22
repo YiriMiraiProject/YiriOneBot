@@ -47,8 +47,13 @@ YiriMirai OneBot 的姊妹项目 YiriBot 正在开发，该框架将提供更多
 
 ### 安装
 
-由于 YiriMirai OneBot 暂未发布到 PyPI，因此你需要手动安装：
+您可以从 PyPI 安装它:
 
+```bash
+pip install yiri-mirai-onebot
+```
+
+您也可以手动安装:
 ```bash
 git clone https://github.com/YiriMiraiProject/YiriMiraiOneBot.git
 poetry install
