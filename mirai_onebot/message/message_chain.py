@@ -2,24 +2,47 @@ from __future__ import annotations
 
 from typing import List, Union
 
-from mirai_onebot.message.message_components import (Audio, File, Image,
-                                                     Location, Mention,
-                                                     MentionAll,
-                                                     MessageComponent, Reply,
-                                                     Text, Video, Voice)
+from mirai_onebot.message.message_components import (
+    Audio,
+    File,
+    Image,
+    Location,
+    Mention,
+    MentionAll,
+    MessageComponent,
+    Reply,
+    Text,
+    Video,
+    Voice,
+)
 from mirai_onebot.utils import logging
 
 logger = logging.getLogger(__name__)
 
-__all__ = [
-    'MessageChain'
-]
+__all__ = ["MessageChain"]
 
 
 class MessageChain(object):
     """消息链"""
 
-    def __init__(self, components: List[Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice, str]]) -> None:
+    def __init__(
+        self,
+        components: List[
+            Union[
+                Audio,
+                File,
+                Image,
+                Location,
+                Mention,
+                MentionAll,
+                Reply,
+                Text,
+                Video,
+                Voice,
+                str,
+            ]
+        ],
+    ) -> None:
         # str 自动转为 Text
         for index, comp in enumerate(components):
             if isinstance(comp, str):
@@ -29,10 +52,31 @@ class MessageChain(object):
 
         self._idx = 0
 
-    def append(self, comp: Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]):
+    def append(
+        self,
+        comp: Union[
+            Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice
+        ],
+    ):
         self.components.append(comp)
 
-    def extend(self, comp: List[Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]]):
+    def extend(
+        self,
+        comp: List[
+            Union[
+                Audio,
+                File,
+                Image,
+                Location,
+                Mention,
+                MentionAll,
+                Reply,
+                Text,
+                Video,
+                Voice,
+            ]
+        ],
+    ):
         self.components.extend(comp)
 
     @staticmethod
@@ -74,14 +118,19 @@ class MessageChain(object):
             MessageChain: 加载后
         """
         if isinstance(data, dict):
-            data = data['message']
+            data = data["message"]
 
         return MessageChain([MessageComponent.load_from_dict(x) for x in data])
 
     def to_dict(self):
         return [x.to_dict() for x in self.components]
 
-    def has(self, comp: Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]) -> bool:
+    def has(
+        self,
+        comp: Union[
+            Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice
+        ],
+    ) -> bool:
         """检测是否有某一组件/某一组件类型。
 
         Args:
@@ -108,7 +157,12 @@ class MessageChain(object):
     def __getitem__(self, idx: int):
         return self.components[idx]
 
-    def __contains__(self, comp:  Union[Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice]) -> bool:
+    def __contains__(
+        self,
+        comp: Union[
+            Audio, File, Image, Location, Mention, MentionAll, Reply, Text, Video, Voice
+        ],
+    ) -> bool:
         return self.has(comp)
 
     def __iter__(self):
@@ -123,3 +177,6 @@ class MessageChain(object):
 
         self._idx += 1
         return result
+
+    def __str__(self) -> str:
+        return "".join([str(x) for x in self.components if isinstance(x, Text)])
