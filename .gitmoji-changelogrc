@@ -1,7 +1,7 @@
 {
     "project": {
-        "name": "YiriMiraiOneBot",
-        "description": "YiriMiraiOneBot 是一个 OneBot 12 协议上的 Python SDK，延续 YiriMirai 项目轻量级、低耦合的编码风格。",
+        "name": "YiriOneBot",
+        "description": "YiriOneBot 是一个 OneBot 12 协议上的 Python SDK，延续 YiriMirai 项目轻量级、低耦合的编码风格。",
         "version": "0.0.1-infdev.1"
     }
 }
