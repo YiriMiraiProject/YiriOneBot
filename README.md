@@ -1,6 +1,5 @@
-
 <div align="center">
-  YiriMirai OneBot
+  Yiri OneBot
   <br />
   <a href="#about"><strong>Explore the docs »</strong></a>
   <br />
@@ -14,9 +13,9 @@
 <div align="center">
 <br />
 
-[![Project license](https://img.shields.io/github/license/YiriMiraiProject/YiriMiraiOneBot.svg?style=flat-square)](LICENSE)
+[![Project license](https://img.shields.io/github/license/YiriMiraiProject/YiriOneBot.svg?style=flat-square)](LICENSE)
 
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/YiriMiraiProject/YiriMiraiOneBot/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/YiriMiraiProject/YiriOneBot/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
 [![code with love by YiriMiraiProject](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-YiriMiraiProject-ff1414.svg?style=flat-square)](https://github.com/YiriMiraiProject)
 
 </div>
@@ -27,17 +26,17 @@
 
 ## 关于
 
-YiriMirai OneBot 是一个 OneBot 12 协议上的 Python SDK，延续 YiriMirai 项目轻量级、低耦合的编码风格。
+Yiri OneBot 是一个 OneBot 12 协议上的 Python SDK，延续 YiriMirai 项目轻量级、低耦合的编码风格。
 
-尽管 YiriMirai OneBot 中带有 Mirai 字样，但由于 OneBot 协议在多个平台上都有不同的实现，因此你也可以将其用于 [LagRange](https://github.com/LagrangeDev/Lagrange.Core) 等项目。并且，从 OneBot 12 开始，OneBot 标准不再与 QQ 紧耦合 ，而是适用于一切支持聊天机器人的地方，因此你也可以将本项目用于编写其他平台上的机器人。
+尽管 Yiri OneBot 中带有 Mirai 字样，但由于 OneBot 协议在多个平台上都有不同的实现，因此你也可以将其用于 [LagRange](https://github.com/LagrangeDev/Lagrange.Core) 等项目。并且，从 OneBot 12 开始，OneBot 标准不再与 QQ 紧耦合 ，而是适用于一切支持聊天机器人的地方，因此你也可以将本项目用于编写其他平台上的机器人。
 
 ### 特性
 
-YiriMirai OneBot 在设计之初便是支持**异步并发**的，因此你可以用它来编写高性能的机器人应用，或者是开发**SaaS**应用，并将其用于多个场景之中。
+Yiri OneBot 在设计之初便是支持**异步并发**的，因此你可以用它来编写高性能的机器人应用，或者是开发**SaaS**应用，并将其用于多个场景之中。
 
-YiriMirai OneBot 不再**与 `mirai-api-http` 耦合**，而是适用于一切支持 OneBot 11/12 标准的地方。
+Yiri OneBot 不再**与 `mirai-api-http` 耦合**，而是适用于一切支持 OneBot 11/12 标准的地方。
 
-YiriMirai OneBot 的姊妹项目 YiriBot 正在开发，该框架将提供更多适用于聊天机器人开发的**高级API**和**插件系统**。
+Yiri OneBot 的姊妹项目 YiriBot 正在开发，该框架将提供更多适用于聊天机器人开发的**高级API**和**插件系统**。
 
 ## 快速上手
 
@@ -55,38 +54,38 @@ pip install yiri-mirai-onebot
 
 您也可以手动安装:
 ```bash
-git clone https://github.com/YiriMiraiProject/YiriMiraiOneBot.git
+git clone https://github.com/YiriMiraiProject/YiriOneBot.git
 poetry install
 ```
 
 ## 使用
 
-更多详情，请查看 [快速上手 - YiriMirai OneBot Documents](https://docs.yiri-mirai.online/getting-started/)。
+更多详情，请查看 [快速上手 - Yiri OneBot Documents](https://docs.yiri-mirai.online/getting-started/)。
 
 ## 开发路线图
 
-查看 [Issues](https://github.com/YiriMiraiProject/YiriMiraiOneBot/issues) 了解我们的开发计划（和可能的Bug），以及：
+查看 [Issues](https://github.com/YiriMiraiProject/YiriOneBot/issues) 了解我们的开发计划（和可能的Bug），以及：
 
-- [近期的新功能计划](https://github.com/YiriMiraiProject/YiriMiraiOneBot/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc)
-- [最严重的 Bug](https://github.com/YiriMiraiProject/YiriMiraiOneBot/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc)
-- [最新的 Bug](https://github.com/YiriMiraiProject/YiriMiraiOneBot/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+- [近期的新功能计划](https://github.com/YiriMiraiProject/YiriOneBot/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc)
+- [最严重的 Bug](https://github.com/YiriMiraiProject/YiriOneBot/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc)
+- [最新的 Bug](https://github.com/YiriMiraiProject/YiriOneBot/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ## 获取支持
 
 你可以通过如下方式来获取我们的支持：
 
-- [GitHub Discussions](https://github.com/YiriMiraiProject/YiriMiraiOneBot/discussions)
+- [GitHub Discussions](https://github.com/YiriMiraiProject/YiriOneBot/discussions)
 - 联系 [YiriMirai Project](https://github.com/YiriMiraiProject) 的组织成员
 
 ## 帮助我们的开发
 
-如果您想对 YiriMirai OneBot 的积极开发表示**感谢**或/和支持：
+如果您想对 Yiri OneBot 的积极开发表示**感谢**或/和支持：
 
-- 为项目添加 [GitHub Star](https://github.com/YiriMiraiProject/YiriMiraiOneBot)。
-- 在 Twitter 上谈论 YiriMirai OneBot。
+- 为项目添加 [GitHub Star](https://github.com/YiriMiraiProject/YiriOneBot)。
+- 在 Twitter 上谈论 Yiri OneBot。
 - 在 [Dev.to](https://dev.to/)、[Medium](https://medium.com/) 或您的个人博客上撰写有关该项目的有趣文章。
 
-让我们一起努力，让 YiriMirai OneBot 变得**更好**！
+让我们一起努力，让 Yiri OneBot 变得**更好**！
 
 ## 做出贡献
 
@@ -99,13 +98,13 @@ poetry install
 
 这个项目最初由 [Yiri Mirai Project](https://github.com/YiriMiraiProject) 的成员 [XYCode Kerman](https://github.com/XYCode-Kerman) 发起。
 
-有关所有作者和贡献者的完整名单，请参阅[贡献者页面](https://github.com/YiriMiraiProject/YiriMiraiOneBot/contributors)。
+有关所有作者和贡献者的完整名单，请参阅[贡献者页面](https://github.com/YiriMiraiProject/YiriOneBot/contributors)。
 
 ## 安全性
 
-YiriMirai OneBot 遵循良好的安全惯例，但无法保证 100% 的安全性。
+Yiri OneBot 遵循良好的安全惯例，但无法保证 100% 的安全性。
 
-YiriMirai OneBot 按**"原样 "**提供，不提供任何**担保**。使用风险自负。
+Yiri OneBot 按**"原样 "**提供，不提供任何**担保**。使用风险自负。
 
 如需了解更多信息和报告安全问题，请参阅我们的[安全文档](docs/SECURITY.md)。
 
@@ -117,8 +116,8 @@ YiriMirai OneBot 按**"原样 "**提供，不提供任何**担保**。使用风�
 
 本项目采用 **GNU 宽通用公共许可证 v3** 和 **反 996 许可证** 开源，因此使用本项目时，你需要注意以下几点：
 
-1. 你可以自由的在代码中以`import`的形式导入并使用 YiriMiraiOneBot 提供的功能，**而不需要开源你使用 YiriMiraiOneBot 编写的业务代码**。
-2. 如果你对 YiriMiraiOneBot 的代码进行了修改，**你需要同时发布你修改后的 YiriMiraiOneBot**。
+1. 你可以自由的在代码中以`import`的形式导入并使用 YiriOneBot 提供的功能，**而不需要开源你使用 YiriOneBot 编写的业务代码**。
+2. 如果你对 YiriOneBot 的代码进行了修改，**你需要同时发布你修改后的 YiriOneBot**。
 3. 如果你引用或修改了本库中的代码（包括`import`本库），你就必须**遵守你所在司法管辖区与劳动和就业相关法律、法规、规则和标准**。
    如果该司法管辖区没有此类法律、法规、规章和标准或其法律、法规、规章和标准不可执行，则你**必须遵守国际劳工标准的核心公约**。
 4. 使用`0d8f2f`提交以前的代码时，请遵循 AGPL-3.0 协议。
