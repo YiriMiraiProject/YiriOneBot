@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help YiriMirai OneBot to improve
+about: Create a report to help Yiri OneBot to improve
 title: "bug: "
 labels: "bug"
 assignees: ""
@@ -8,7 +8,7 @@ assignees: ""
 
 # Bug Report
 
-**YiriMirai OneBot version:**
+**Yiri OneBot version:**
 
 <!-- Please specify commit or tag version. -->
 

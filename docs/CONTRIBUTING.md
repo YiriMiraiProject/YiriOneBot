@@ -9,7 +9,7 @@
 要设置开发环境，请按照以下步骤：
 
 ```sh
-git clone https://github.com/YiriMiraiProject/YiriMiraiOneBot
+git clone https://github.com/YiriMiraiProject/YiriOneBot
 poetry install
 ```
 

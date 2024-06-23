@@ -4,10 +4,10 @@
   <a href="#about"><strong>Explore the docs »</strong></a>
   <br />
   <br />
-  <a href="https://github.com/YiriMiraiProject/YiriMiraiOneBot/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
+  <a href="https://github.com/YiriMiraiProject/YiriOneBot/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
   ·
-  <a href="https://github.com/YiriMiraiProject/YiriMiraiOneBot/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
-  .<a href="https://github.com/YiriMiraiProject/YiriMiraiOneBot/discussions">Ask a Question</a>
+  <a href="https://github.com/YiriMiraiProject/YiriOneBot/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
+  .<a href="https://github.com/YiriMiraiProject/YiriOneBot/discussions">Ask a Question</a>
 </div>
 
 <div align="center">

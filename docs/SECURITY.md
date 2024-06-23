@@ -2,7 +2,7 @@
 
 ## 报告漏洞
 
-如果在YiriMirai OneBot中存在任何漏洞，请不要犹豫立即报告它们。
+如果在Yiri OneBot中存在任何漏洞，请不要犹豫立即报告它们。
 
 1. 使用任何**私人联系地址**，例如发送邮件到[security@yiri-mirai.online](mailto:security@yiri-mirai.online)
 
