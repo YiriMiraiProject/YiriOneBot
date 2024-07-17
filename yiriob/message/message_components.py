@@ -1,4 +1,4 @@
-from typing import Annotated, Any, Literal, Optional, TypeVar
+from typing import Annotated, Any, Literal, Optional, TypeVar, Union
 from pydantic import BaseModel, Field, model_serializer
 from abc import ABC
 
@@ -38,6 +38,27 @@ class MessageComponent(BaseModel, ABC):
             params.append(f"{k}={self.__getattribute__(k)}")
 
         return f'[CQ:{self.comp_type},{",".join(params)}]'  # 用列表推导式太乱了，这里用传统形式写
+
+    def __eq__(self, another: Union["MessageComponent", str, object]) -> bool:
+        """比较
+
+        Args:
+            another: 另一个对象
+
+        Returns:
+            当 another 是一个 MessageComponent 时，比较它们的 CQ 码；
+            当 another 是一个 str 时，比较该组件的 CQ 码是否和其相同（由于 Text 重载了 to_cqcode 方法，因此 Text 组件只会比较文本内容是否相同）；
+            当 another 不是上述任何一种时，比较它们的 **内存地址**。（也就是 is 运算符）
+        """
+        if isinstance(another, MessageComponent):
+            return self.to_cqcode() == another.to_cqcode()
+        elif isinstance(another, str):
+            return self.to_cqcode() == another
+        else:
+            return self is another
+
+    def __repr__(self) -> str:
+        return self.to_cqcode()
 
 
 # Attention!
