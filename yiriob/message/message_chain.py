@@ -1,6 +1,6 @@
 from pydantic import BaseModel, model_serializer
 from .message_components import MessageComponent
-from typing import Any, Generator, SupportsIndex
+from typing import TYPE_CHECKING, Any, Generator, SupportsIndex, Literal
 
 
 class MessageChain(BaseModel):
@@ -9,9 +9,8 @@ class MessageChain(BaseModel):
     def __init__(self, components: list[MessageComponent]) -> None:
         super().__init__(components=components)
 
-    @model_serializer
-    def model_ser(self) -> list[dict[str, Any]]:
-        return [x.model_dump(mode="json") for x in self.components]
+    def to_dict(self) -> list[dict[str, Any]]:
+        return [x.to_dict() for x in self.components]
 
     def to_cqcode(self) -> str:
         """转换成 CQ 码。不保证完全正确，谨慎使用。如有问题，请提 Issue。

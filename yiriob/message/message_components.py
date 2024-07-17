@@ -18,11 +18,10 @@ class MessageComponent(BaseModel, ABC):
 
     comp_type: str = Field(description="组件类型", alias="type")
 
-    @model_serializer
-    def model_ser(self) -> dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "type": self.comp_type,
-            "data": self.model_dump(mode="json", exclude={"type"}),
+            "data": self.model_dump(mode="json", exclude={"type", "comp_type"}),
         }
 
     def to_cqcode(self) -> str:

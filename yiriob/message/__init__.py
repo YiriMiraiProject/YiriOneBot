@@ -19,6 +19,7 @@ from .message_components import (
     Forward,
     Node,
     Xml,
+    Json,
 )
 
 __all__ = [
@@ -42,4 +43,5 @@ __all__ = [
     "Forward",
     "Node",
     "Xml",
+    "Json",
 ]
