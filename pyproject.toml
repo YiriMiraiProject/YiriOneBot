@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "yiri-bot"
+version = "0.0.1"
+description = "YiriBot 是一个低耦合、异步的高性能OneBot 11 SDK。"
+authors = ["XYCode Kerman <xycode-xyc@outlook.com>"]
+license = "LGPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+pydantic = "^2.8.2"
+rich = "^13.7.1"
+websockets = "^12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
