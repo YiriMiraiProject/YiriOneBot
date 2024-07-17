@@ -148,7 +148,7 @@ class At(MessageComponent):
     qq: str = Field(description="@的 QQ 号，all 表示全体成员")
 
     def __init__(self, qq: str) -> None:
-        self.qq = qq
+        BaseModel.__init__(self, qq=qq)
 
 
 class Rps(MessageComponent):
@@ -210,7 +210,7 @@ class Reply(MessageComponent):
     id: str = Field(description="回复时引用的消息 ID")
 
     def __init__(self, id: str) -> None:
-        self.id = id
+        BaseModel.__init__(self, id=id)
 
 
 class Forward(MessageComponent):
@@ -218,7 +218,7 @@ class Forward(MessageComponent):
     id: Annotated[str, OnlyReceive] = Field(description="合并转发 ID")
 
     def __init__(self, id: str) -> None:
-        self.id = id
+        BaseModel.__init__(self, id=id)
 
 
 class Node(MessageComponent):
@@ -234,7 +234,7 @@ class Xml(MessageComponent):
     data: str = Field(description="XML 内容")
 
     def __init__(self, data: str) -> None:
-        self.data = data
+        BaseModel.__init__(self, data=data)
 
 
 class Json(MessageComponent):
@@ -242,7 +242,7 @@ class Json(MessageComponent):
     data: str = Field(description="JSON 内容")
 
     def __init__(self, data: str) -> None:
-        self.data = data
+        BaseModel.__init__(self, data=data)
 
 
 # Attention!
