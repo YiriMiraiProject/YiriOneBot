@@ -37,13 +37,13 @@ class EventBus:
             event: 事件
             handler: 事件响应器，传入 None 表示取消所有
         """
-        if handler is None:
-            try:
+        try:
+            if handler is None:
                 del self.handlers[event]
-            except KeyError:
-                pass
-        else:
-            self.handlers[event].remove(handler)
+            else:
+                self.handlers[event].remove(handler)
+        except KeyError:
+            pass
 
     def on(self, event: Event):
         """订阅事件，装饰器版本
@@ -71,7 +71,6 @@ class EventBus:
             True: 调用成功
         """
         if self.handlers.get(event, None) is None:
-            logger.debug(f"找不到事件 {event} 的响应器")
             logger.debug(f"找不到事件 {event} 的响应器")
             return False
 
