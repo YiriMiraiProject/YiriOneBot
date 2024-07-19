@@ -1,7 +1,7 @@
 from abc import ABC
-from typing import Literal
+from typing import Literal, Unpack, final, Type
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class EventBase(BaseModel, ABC):
@@ -13,9 +13,22 @@ class EventBase(BaseModel, ABC):
         post_type: 事件类型
     """
 
+    @final
+    def __init_subclass__(cls, **kwargs: Unpack[ConfigDict]):
+        if cls.auto_register and type(cls) != EventBase:
+            events_list.append(cls)
+
+        return super().__init_subclass__(**kwargs)
+
     time: int
     self_id: int
     post_type: Literal["message", "notice", "request", "meta_event"] | str
+    auto_register: bool = Field(
+        default=True,
+        description="是否自动注册到 event_list 中，如果你的类是一个基类，则不要开启该选项。",
+    )
 
+
+events_list: list[Type[EventBase]] = []
 
 __all__ = ["EventBase"]
