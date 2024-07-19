@@ -1,4 +1,5 @@
-from yiriob.message import MessageChain, Text, Face, At, Reply, Forward, Xml, Json
+from yiriob.message import (At, Face, Forward, Json, MessageChain, Reply, Text,
+                            Xml)
 
 
 def test_messagechain():

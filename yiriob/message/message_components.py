@@ -1,6 +1,7 @@
-from typing import Annotated, Any, Literal, Optional, TypeVar, Union
-from pydantic import BaseModel, Field, model_serializer
 from abc import ABC
+from typing import Annotated, Any, Literal, Optional, TypeVar, Union
+
+from pydantic import BaseModel, Field, model_serializer
 
 OnlyReceive = TypeVar("OnlyReceive", bound=Any)
 OnlySend = TypeVar("OnlySend", bound=Any)

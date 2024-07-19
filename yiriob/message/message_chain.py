@@ -1,6 +1,8 @@
+from typing import TYPE_CHECKING, Any, Generator, Literal, SupportsIndex
+
 from pydantic import BaseModel, model_serializer
+
 from .message_components import MessageComponent
-from typing import TYPE_CHECKING, Any, Generator, SupportsIndex, Literal
 
 
 class MessageChain(BaseModel):

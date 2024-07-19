@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Literal, Unpack, final, Type
+from typing import Literal, Type, Unpack, final
 
 from pydantic import BaseModel, ConfigDict, Field
 

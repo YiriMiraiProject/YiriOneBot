@@ -1,6 +1,8 @@
-from yiriob.event import EventBus
 import asyncio
+
 from pytest import mark
+
+from yiriob.event import EventBus
 
 
 @mark.asyncio

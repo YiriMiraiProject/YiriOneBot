@@ -3,7 +3,8 @@ from typing import Any
 
 from yiriob.event import EventBus
 from yiriob.exceptions.api import InterfaceCallFailed
-from yiriob.interface import Interface, InterfaceParamsType, InterfaceResponseType
+from yiriob.interface import (Interface, InterfaceParamsType,
+                              InterfaceResponseType)
 
 
 class Adapter(ABC):

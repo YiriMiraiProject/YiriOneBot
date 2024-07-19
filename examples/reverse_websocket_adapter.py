@@ -1,11 +1,11 @@
 # 本例提供 Reverse Websocket Adapter 的直接调用效果
 # 非专业人员请通过 Bot 类调用 API
+import asyncio
 from typing import Any
 
-import asyncio
 from yiriob.adapters import ReverseWebsocketAdapter
 from yiriob.event import EventBus
-from yiriob.interface import InterfaceParams, InterfaceResponse, Interface
+from yiriob.interface import Interface, InterfaceParams, InterfaceResponse
 
 bus = EventBus()
 adapter = ReverseWebsocketAdapter(
