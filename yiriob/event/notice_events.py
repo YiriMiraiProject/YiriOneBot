@@ -18,8 +18,6 @@ class File(BaseModel):
 
 
 class NoticeEvent(EventBase):
-    auto_register: bool = False
-
     post_type: Literal["notice"] = "notice"  # type: ignore
     notice_type: Literal[
         "group_upload",

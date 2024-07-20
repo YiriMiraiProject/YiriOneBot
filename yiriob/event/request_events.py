@@ -11,7 +11,6 @@ from .base import EventBase
 
 
 class RequestEvent(EventBase):
-    auto_register: bool = False
     post_type: Literal["request"] = "request"  # type: ignore
     request_type: Literal["friend", "group"]
 

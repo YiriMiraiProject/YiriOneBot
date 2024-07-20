@@ -32,7 +32,7 @@ class SendGroupMsg(Interface[SendGroupMsgParams, SendGroupMsgResponse]):
 async def onebot_event(data: dict[Any, str]):
     # 收到事件就调用一次 API（包括心跳）
     await adapter.call_api(
-        SendGroupMsg(),
+        SendGroupMsg,
         SendGroupMsgParams(group_id=825435724, message="Hello World"),
     )
 

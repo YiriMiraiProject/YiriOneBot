@@ -1,3 +1,4 @@
+from typing import Type
 from yiriob.interface.base import InterfaceParams, InterfaceResponse, Interface
 from yiriob.message import MessageChain
 
@@ -15,9 +16,9 @@ class SendPrivateMessageResponse(InterfaceResponse):
 class SendPrivateMessageInterface(
     Interface[SendPrivateMessageParams, SendPrivateMessageResponse]
 ):
-    action = "send_private_msg"
-    params_type = SendPrivateMessageParams
-    response_type = SendPrivateMessageResponse
+    action: str = "send_private_msg"
+    params_type: Type[SendPrivateMessageParams] = SendPrivateMessageParams
+    response_type: Type[SendPrivateMessageResponse] = SendPrivateMessageResponse
 
 
 class SendGroupMessageParams(InterfaceParams):
@@ -33,9 +34,9 @@ class SendGroupMessageResponse(InterfaceResponse):
 class SendGroupMessageInterface(
     Interface[SendGroupMessageParams, SendGroupMessageResponse]
 ):
-    action = "send_group_msg"
-    params_type = SendGroupMessageParams
-    response_type = SendGroupMessageResponse
+    action: str = "send_group_msg"
+    params_type: Type[SendGroupMessageParams] = SendGroupMessageParams
+    response_type: Type[SendGroupMessageResponse] = SendGroupMessageResponse
 
 
 __all__ = [

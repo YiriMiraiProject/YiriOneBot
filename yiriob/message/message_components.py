@@ -1,7 +1,16 @@
 from abc import ABC
-from typing import Annotated, Any, Literal, Optional, TypeVar, Union
+from typing import (
+    TYPE_CHECKING,
+    Annotated,
+    Any,
+    ClassVar,
+    Literal,
+    Optional,
+    TypeVar,
+    Union,
+)
 
-from pydantic import BaseModel, Field, model_serializer
+from pydantic import BaseModel, Field, TypeAdapter, model_serializer
 
 OnlyReceive = TypeVar("OnlyReceive", bound=Any)
 OnlySend = TypeVar("OnlySend", bound=Any)
@@ -19,11 +28,15 @@ class MessageComponent(BaseModel, ABC):
 
     comp_type: str = Field(description="组件类型", alias="type")
 
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "type": self.comp_type,
-            "data": self.model_dump(mode="json", exclude={"type", "comp_type"}),
-        }
+    @model_serializer
+    def to_dict(self, *args, **kwargs) -> dict[str, Any]:
+        data = {}
+        for k, v in self:
+            if k in ["type", "comp_type"]:
+                continue
+            data[k] = TypeAdapter(type(v)).dump_python(v, mode="json")
+
+        return {"type": self.comp_type, "data": data}
 
     def to_cqcode(self) -> str:
         """转换成 CQ 码。不保证完全正确，如果有特殊组件，请自行实现该方法。如有问题，请提 Issue。

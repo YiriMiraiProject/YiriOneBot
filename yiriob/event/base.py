@@ -15,7 +15,12 @@ class EventBase(BaseModel, ABC):
 
     @final
     def __init_subclass__(cls, **kwargs: Unpack[ConfigDict]):
-        if cls.auto_register and type(cls) != EventBase:
+        if cls.model_fields["auto_register"].default is True and cls.__name__ not in [
+            "EventBase",
+            "MessageEvent",
+            "NoticeEvent",
+            "RequestEvent",
+        ]:
             events_list.append(cls)
 
         return super().__init_subclass__(**kwargs)

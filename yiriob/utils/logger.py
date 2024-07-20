@@ -11,9 +11,8 @@ except ImportError:
 
 
 logging.basicConfig(
-    level=logging.INFO,
-    handlers=[RichHandler(level=logging.INFO)
-              ] if RichHandler is not None else [],
+    level=logging.DEBUG,
+    handlers=[RichHandler()] if RichHandler is not None else [],
 )
 
 logger = logging.getLogger("yiri-bot")

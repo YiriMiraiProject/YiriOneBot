@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, Type
 
 from yiriob.event import EventBus
 from yiriob.exceptions.api import InterfaceCallFailed
-from yiriob.interface import (Interface, InterfaceParamsType,
-                              InterfaceResponseType)
+from yiriob.interface import Interface, InterfaceParamsType, InterfaceResponseType
 
 
 class Adapter(ABC):
@@ -46,7 +45,7 @@ class Adapter(ABC):
 
     async def call_api(
         self,
-        interface: Interface[InterfaceParamsType, InterfaceResponseType],
+        interface: Type[Interface[InterfaceParamsType, InterfaceResponseType]],
         params: InterfaceParamsType,
     ) -> InterfaceResponseType:
         """公开接口，用于调用 API，有静态类型推导和验证
@@ -61,7 +60,10 @@ class Adapter(ABC):
         Raises:
             TimeoutError: 调用超时
         """
-        resp = await self._call_api(interface.action, params.model_dump(mode="json"))
+        print(params.model_dump(mode="json"))
+        resp = await self._call_api(
+            interface.model_fields["action"].default, params.model_dump(mode="json")
+        )
         if resp.get("status", None) == "failed":
             raise InterfaceCallFailed(
                 action=interface.action,
@@ -69,7 +71,9 @@ class Adapter(ABC):
                 retcode=resp["retcode"],
             )
 
-        return interface.response_type.model_validate(resp["data"])
+        return interface.model_fields["response_type"].default.model_validate(
+            resp["data"]
+        )
 
     def emit_onebot_event(self, data: dict[str, Any]):
         self.bus.emit("onebot_event", data)
