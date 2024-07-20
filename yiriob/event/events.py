@@ -69,7 +69,7 @@ class MessageEvent(EventBase):
     message_type: str
     message_id: int
     message: MessageChain
-    original_message: MessageChain
+    original_message: Optional[MessageChain] = None
     raw_message: str
     font: int
     sender: Sender
