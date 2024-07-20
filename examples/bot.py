@@ -1,6 +1,6 @@
 from yiriob.bot import Bot
 from yiriob.event import EventBus
-from yiriob.event.message_events import GroupMessageEvent, PrivateMessageEvent
+from yiriob.event.events import GroupMessageEvent, PrivateMessageEvent
 from yiriob.adapters import ReverseWebsocketAdapter
 from yiriob.interface.message import (
     SendGroupMessageInterface,
@@ -22,7 +22,7 @@ bot = Bot(
 
 @bus.on(GroupMessageEvent)
 async def on_group_message(event: GroupMessageEvent) -> None:
-    await bot.adapter.call_api(
+    resp = await bot.adapter.call_api(
         SendGroupMessageInterface,
         SendGroupMessageParams(
             group_id=event.group_id, message=MessageChain([Text("Hello World!")])
