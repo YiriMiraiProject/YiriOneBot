@@ -6,7 +6,7 @@ from yiriob.message import MessageChain
 
 class SendPrivateMessageParams(InterfaceParams):
     user_id: int
-    message: MessageChain
+    message: MessageChain | str
     auto_escape: bool = False
 
 
@@ -24,7 +24,7 @@ class SendPrivateMessageInterface(
 
 class SendGroupMessageParams(InterfaceParams):
     group_id: int
-    message: MessageChain
+    message: MessageChain | str
     auto_escape: bool = False
 
 
