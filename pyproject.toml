@@ -18,6 +18,7 @@ pytest = "^8.2.2"
 coverage = "^7.6.0"
 pytest-cov = "^5.0.0"
 pytest-asyncio = "^0.23.8"
+pylint = "^3.2.5"
 
 [tool.coverage.report]
 omit = ['tests/*.py']
