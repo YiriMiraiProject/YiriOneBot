@@ -1,10 +1,29 @@
 [tool.poetry]
-name = "yiri-bot"
-version = "0.0.1"
-description = "YiriBot 是一个低耦合、异步的高性能OneBot 11 SDK。"
+name = "yiri-onebot"
+version = "0.0.1-beta.1"
+description = "YiriOneBot 是一个低耦合、异步的高性能OneBot 11 SDK。"
 authors = ["XYCode Kerman <xycode-xyc@outlook.com>"]
 license = "LGPL-3.0"
 readme = "README.md"
+homepage = "https://github.com/YiriMiraiProject/YiriOneBot"
+repository = "https://github.com/YiriMiraiProject/YiriOneBot"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Topic :: Communications",
+  "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+  "Framework :: AsyncIO",
+
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+
+[[tool.poetry.packages]]
+include = "yiriob"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
