@@ -1,12 +1,15 @@
-from typing import Annotated, Any
+from typing import Annotated, Any, Iterable
 
 from pydantic import GetCoreSchemaHandler, WrapSerializer
 from pydantic_core import CoreSchema, core_schema
 
-from .message_components import MessageComponent
+from .message_components import MessageComponent, Text
 
 
 class MessageChain(list[MessageComponent]):
+    def __init__(self, iterable: Iterable[MessageComponent | str], /) -> None:
+        self.extend([Text(x) if isinstance(x, str) else x for x in iterable])
+
     @classmethod
     def __get_pydantic_core_schema__(
         cls, source_type: Any, handler: GetCoreSchemaHandler
