@@ -1,5 +1,6 @@
 # pyright: reportIncompatibleVariableOverride=false
-from typing import Optional, Literal
+from typing import Literal, Optional
+
 from pydantic import BaseModel, ConfigDict
 
 from yiriob.event.base import EventBase

@@ -1,7 +1,7 @@
 from typing import Annotated, Any
 
-from pydantic_core import core_schema, CoreSchema
 from pydantic import GetCoreSchemaHandler, WrapSerializer
+from pydantic_core import CoreSchema, core_schema
 
 from .message_components import MessageComponent
 

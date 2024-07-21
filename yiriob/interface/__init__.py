@@ -1,13 +1,8 @@
 from .base import (Interface, InterfaceParams, InterfaceParamsType,
                    InterfaceResponse, InterfaceResponseType)
-from .message import (
-    SendPrivateMessageParams,
-    SendPrivateMessageResponse,
-    SendPrivateMessageInterface,
-    SendGroupMessageParams,
-    SendGroupMessageResponse,
-    SendGroupMessageInterface,
-)
+from .message import (SendGroupMessageInterface, SendGroupMessageParams,
+                      SendGroupMessageResponse, SendPrivateMessageInterface,
+                      SendPrivateMessageParams, SendPrivateMessageResponse)
 
 __all__ = [
     "Interface",

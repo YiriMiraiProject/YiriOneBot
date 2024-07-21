@@ -1,14 +1,6 @@
 from abc import ABC
-from typing import (
-    TYPE_CHECKING,
-    Annotated,
-    Any,
-    ClassVar,
-    Literal,
-    Optional,
-    TypeVar,
-    Union,
-)
+from typing import (TYPE_CHECKING, Annotated, Any, ClassVar, Literal, Optional,
+                    TypeVar, Union)
 
 from pydantic import BaseModel, Field, TypeAdapter, model_serializer
 

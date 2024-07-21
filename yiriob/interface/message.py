@@ -1,5 +1,6 @@
 from typing import Type
-from yiriob.interface.base import InterfaceParams, InterfaceResponse, Interface
+
+from yiriob.interface.base import Interface, InterfaceParams, InterfaceResponse
 from yiriob.message import MessageChain
 
 

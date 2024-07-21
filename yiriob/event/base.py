@@ -1,5 +1,6 @@
 from abc import ABC
-from typing import Any, Literal, Type, Unpack, final, Optional, get_args, get_origin
+from typing import (Any, Literal, Optional, Type, Unpack, final, get_args,
+                    get_origin)
 
 from pydantic import BaseModel, ConfigDict, Field
 

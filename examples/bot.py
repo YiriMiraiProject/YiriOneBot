@@ -1,13 +1,11 @@
+from yiriob.adapters import ReverseWebsocketAdapter
 from yiriob.bot import Bot
 from yiriob.event import EventBus
 from yiriob.event.events import GroupMessageEvent, PrivateMessageEvent
-from yiriob.adapters import ReverseWebsocketAdapter
-from yiriob.interface.message import (
-    SendGroupMessageInterface,
-    SendGroupMessageParams,
-    SendPrivateMessageInterface,
-    SendPrivateMessageParams,
-)
+from yiriob.interface.message import (SendGroupMessageInterface,
+                                      SendGroupMessageParams,
+                                      SendPrivateMessageInterface,
+                                      SendPrivateMessageParams)
 from yiriob.message.message_chain import MessageChain
 from yiriob.message.message_components import Text
 

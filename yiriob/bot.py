@@ -2,13 +2,10 @@ import asyncio
 from typing import Any, Optional
 
 import pydantic
+
 from yiriob.adapters.base import Adapter
-from yiriob.event.base import (
-    EventBase,
-    events_list,
-    get_key_from_event,
-    get_key_from_dict,
-)
+from yiriob.event.base import (EventBase, events_list, get_key_from_dict,
+                               get_key_from_event)
 from yiriob.utils import logger
 
 
