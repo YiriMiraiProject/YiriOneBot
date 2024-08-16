@@ -47,10 +47,14 @@ Yiri OneBot 的姊妹项目 YiriBot 正在开发，该框架将提供更多适�
 
 ### 安装
 
-您也可以手动安装:
+您可以手动安装:
 ```bash
 git clone https://github.com/YiriMiraiProject/YiriOneBot.git
 poetry install
+```
+当然你也可以通过pip
+```bash
+pip install yiri-onebot
 ```
 
 ## 使用
